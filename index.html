@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DXSign Clone with API</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">YourBrand</div>
+      <ul>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#api">API</a></li>
+      </ul>
+    </nav>
+    <div class="hero">
+      <h1>Digital Signatures, Made Simple</h1>
+      <p>Fast, secure document signing with our easy-to-use API.</p>
+      <a href="#api" class="btn">Explore API</a>
+    </div>
+  </header>
+
+  <section id="features">
+    <h2>Features</h2>
+    <ul>
+      <li>✅ Secure Document Signing</li>
+      <li>📄 Easy Upload & Send</li>
+      <li>📬 Email Notification & Logs</li>
+    </ul>
+  </section>
+
+  <section id="api">
+    <h2>Sign a Document</h2>
+    <form id="signForm" enctype="multipart/form-data">
+      <input type="email" name="email" placeholder="Recipient Email" required />
+      <input type="file" name="document" accept=".pdf" required />
+      <button type="submit">Send for Signing</button>
+    </form>
+    <p id="responseMessage"></p>
+  </section>
+
+  <footer>
+    <p>© 2025 YourBrand. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
