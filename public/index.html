@@ -1,16 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Welcome - Scrumptious Certs</title>
-  <link rel="stylesheet" href="/style.css">
+  <meta charset="UTF-8" />
+  <title>Scrumptious Certs - Home</title>
+  <link rel="stylesheet" href="/style.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+    }
+    header, footer {
+      background-color: #1f2937;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    .hero {
+      padding: 4rem 2rem;
+      text-align: center;
+      background: linear-gradient(to right, #3b82f6, #1e3a8a);
+      color: white;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+    }
+    .cta-button {
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      background-color: #facc15;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      color: #1f2937;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+    .cta-button:hover {
+      background-color: #eab308;
+    }
+  </style>
 </head>
 <body>
-  <header><h1>Scrumptious Certs</h1></header>
-  <main style="text-align:center; padding:2rem;">
-    <p>Welcome to Scrumptious Certs, your go-to for Apple sideloading certificates.</p>
-    <a href="/purchase.html"><button>Purchase a Certificate</button></a>
+  <header>
+    <h1>Scrumptious Certs</h1>
+  </header>
+  <main class="hero">
+    <h1>Get Your Apple Sideloading Certificate</h1>
+    <p>Fast. Reliable. Revoke-Protected. Join thousands of satisfied iOS users today.</p>
+    <a href="/purchase.html"><button class="cta-button">Purchase Now</button></a>
   </main>
-  <footer><p>© 2025 Scrumptious Certs</p></footer>
+  <footer>
+    <p>© 2025 Scrumptious Certs. All rights reserved.</p>
+  </footer>
 </body>
 </html>
