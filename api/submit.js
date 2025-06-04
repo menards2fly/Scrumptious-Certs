@@ -17,7 +17,7 @@ export default async function handler(req, res) {
       revokeProtectionIncluded
     }, {
       headers: {
-        'Authorization': 'Bearer YOUR_API_KEY',
+        'Authorization': 'Bearer dx_vF8Grm1eGwn1gwgKig0eOVNq6H5axsWqGE3alxZMRig',
         'Content-Type': 'application/json'
       }
     });
