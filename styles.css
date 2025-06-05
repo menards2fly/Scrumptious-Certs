@@ -1,0 +1,126 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+    font-size: 14px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 0.8s ease forwards;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #1a1a1a;
+    border-bottom: 2px solid #e50914;
+}
+
+.logo-img {
+    width: 100px;
+    height: auto;
+    display: block;
+    margin: 0 auto 15px;
+}
+
+.logo-text {
+    font-size: 3em;
+    color: #e50914;
+    margin: 0;
+}
+
+.tagline {
+    font-size: 1em;
+    color: #cccccc;
+    margin-top: 8px;
+}
+
+.main {
+    padding: 30px 20px;
+}
+
+.intro, .powered, .reliability, .support, .pricing, .payment-contact, .cta {
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: #e50914;
+    margin-bottom: 8px;
+    font-size: 1.5em;
+}
+
+p {
+    line-height: 1.5;
+    font-size: 1em;
+}
+
+.support ul, .pricing ul, .payment-contact ul {
+    list-style: none;
+    padding: 0;
+}
+
+.support ul li, .pricing ul li, .payment-contact ul li {
+    background: #1e1e1e;
+    padding: 10px 15px;
+    margin: 8px 0;
+    border-left: 4px solid #e50914;
+    border-radius: 6px;
+    transition: background 0.3s;
+    font-size: 0.95em;
+}
+
+.support ul li:hover, .pricing ul li:hover, .payment-contact ul li:hover {
+    background: #292929;
+}
+
+.order-button {
+    display: inline-block;
+    background-color: #e50914;
+    color: #fff;
+    padding: 12px 25px;
+    font-size: 1em;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+    margin-top: 15px;
+}
+
+.order-button:hover {
+    background-color: #ff1f2f;
+}
+
+.footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #1a1a1a;
+    font-size: 0.8em;
+    color: #888;
+    border-top: 2px solid #e50914;
+}
+
+a {
+    color: #e50914;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
