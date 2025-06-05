@@ -19,3 +19,8 @@ document.addEventListener("DOMContentLoaded", function () {
         appearOnScroll.observe(fader);
     });
 });
+
+window.addEventListener("load", function () {
+    const loaderWrapper = document.getElementById("loader-wrapper");
+    if (loaderWrapper) loaderWrapper.style.display = "none";
+});
