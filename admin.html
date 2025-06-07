@@ -25,6 +25,8 @@
     <input id="statusInput" />
     <label>Device Status:</label>
     <input id="deviceInput" />
+    <label>Cert Expiration Date:</label>
+    <input id="expireInput" placeholder="YYYY-MM-DD" />
     <label>Download Link:</label>
     <input id="linkInput" />
     <button onclick="saveUserData()">Save User Settings</button>
@@ -32,7 +34,7 @@
   </div>
 </div>
 <script>
-const ADMIN_KEY = "supersecretkey";
+const ADMIN_KEY = "key";
 let db = {};
 
 function unlock() {
@@ -54,7 +56,6 @@ function saveAnnouncements() {
   saveJSON();
 }
 
-
 function saveUserData() {
   const user = document.getElementById("targetUser").value.trim();
   if (!user) {
@@ -65,10 +66,11 @@ function saveUserData() {
   if (!db.deviceStatus) db.deviceStatus = {};
   if (!db.certDownloadLink) db.certDownloadLink = {};
 
-  // Overwrite the sections instead of merging or appending
   db.certStatus[user] = document.getElementById("statusInput").value;
   db.deviceStatus[user] = document.getElementById("deviceInput").value;
   db.certDownloadLink[user] = document.getElementById("linkInput").value;
+  db.certExpires = db.certExpires || {};
+  db.certExpires[user] = document.getElementById("expireInput").value;
 
   saveJSON();
 }

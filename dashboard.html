@@ -1,13 +1,134 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>Dashboard</title><link href="styles.css" rel="stylesheet"/></head><body><div id="loader-wrapper"><div class="loader"></div></div><header><img src="logo.png" class="logo-img"/><nav id="main-nav" class="nav"></nav></header><div class="container main fade-in" data-delay="200"><h2>Your Announcements</h2><div id="ann"></div><h2>Your Certificate Status</h2><div id="stat"></div><section class="fade-in" data-delay="400" style="display:flex;gap:20px;margin-top:20px;"><div class="card"><h3>Device Status</h3><p id="dev"></p></div><div class="card"><h3>Download Certificates</h3><a id="dl" href="#" class="order-button">Download</a></div></section></div><script src="script.js"></script><script>document.addEventListener('DOMContentLoaded',function(){var u=localStorage.getItem('authUser');if(!u)location='login.html';fetch('data.json?v=' + Date.now()).then(r=>r.json()).then(d=>{d.announcements.all.concat(d.announcements[u]||[]).forEach(m=>ann.appendChild(Object.assign(document.createElement('p'),{textContent:m})));stat.textContent=d.certStatus[u]||d.certStatus.all;dev.textContent=d.deviceStatus[u]||d.deviceStatus.all;dl.href=d.certDownloadLink[u]||d.certDownloadLink.all;
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>Dashboard</title><link href="styles.css" rel="stylesheet"/></head><body></div><header><img src="logo.png" class="logo-img"/><nav id="main-nav" class="nav"></nav></header>
+<div class="container fade-in" data-delay="100">
+  <section style="display:flex;justify-content:center;margin-top:10px;">
+    <div class="card" style="max-width:300px;">
+      <h3>Certificate Expires In</h3>
+      <div id="certDaysTop" class="loader" style="margin:10px auto;"></div>
+    </div>
+  </section>
+</div>
 
+<div class="container main fade-in" data-delay="200"><h2>Your Announcements</h2><div id="ann"></div><h2>Your Certificate Status</h2><div id="stat"></div><section class="fade-in" data-delay="400" style="display:flex;gap:20px;margin-top:20px;"><div class="card"><h3>Device Status</h3><p id="dev"></p></div><div class="card"><h3>Download Certificates</h3><a id="dl" href="#" class="order-button">Download</a></div></section></div><script src="script.js"></script><script>document.addEventListener('DOMContentLoaded',function(){var u=localStorage.getItem('authUser');if(!u)location='login.html';fetch('data.json?v=' + Date.now()).then(r=>r.json()).then(d=>{d.announcements.all.concat(d.announcements[u]||[]).forEach(m=>ann.appendChild(Object.assign(document.createElement('p'),{textContent:m})));stat.textContent=d.certStatus[u]||d.certStatus.all;dev.textContent=d.deviceStatus[u]||d.deviceStatus.all;dl.href=d.certDownloadLink[u]||d.certDownloadLink.all;
+
+        
         const exp = d.certExpires[u] || d.certExpires.all;
+        let days = "N/A";
         if (exp) {
           const end = new Date(exp);
           const now = new Date();
           const diffTime = end - now;
           const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-          certCountdown.textContent = diffDays > 0 ? diffDays + " day(s) left" : "Expired";
+          days = diffDays > 0 ? diffDays + " day(s) left" : "Expired";
+        }
+        const el1 = document.getElementById("certCountdown");
+        const el2 = document.getElementById("certDaysTop");
+        if (el1) el1.outerHTML = '<p id="certCountdown"></p>';
+        if (el2) el2.outerHTML = '<p id="certDaysTop"></p>';
+
         } else {
           certCountdown.textContent = "N/A";
         }
-});});</script></body></html>
+});});</script>
+
+<script>
+// No loader blocking
+
+document.addEventListener('DOMContentLoaded', () => {
+  const user = localStorage.getItem('authUser');
+  if (!user) {
+    window.location = 'login.html';
+    return;
+  }
+
+  // Clear fields initially
+  document.getElementById('ann').innerHTML = '';
+  document.getElementById('stat').textContent = '';
+  document.getElementById('dev').textContent = '';
+  document.getElementById('certDaysTop').textContent = '';
+  document.getElementById('certCountdown').textContent = '';
+  document.getElementById('dl').removeAttribute('href');
+
+  // Fetch fresh JSON
+  fetch(`data.json?v=${Date.now()}`)
+    .then(r => r.json())
+    .then(d => {
+      // Announcements
+      const all = d.announcements?.all || [];
+      const personal = d.announcements[user] || [];
+      all.concat(personal).forEach(msg => {
+        const p = document.createElement('p');
+        p.textContent = msg;
+        document.getElementById('ann').appendChild(p);
+      });
+
+      // Certificate status
+      document.getElementById('stat').textContent = d.certStatus[user] || d.certStatus.all || '';
+
+      // Device status
+      document.getElementById('dev').textContent = d.deviceStatus[user] || d.deviceStatus.all || '';
+
+      // Download link
+      const link = d.certDownloadLink[user] || d.certDownloadLink.all;
+      if (link) document.getElementById('dl').href = link;
+
+      // Countdown
+      const expAll = d.certExpires[user] || d.certExpires.all;
+      let daysText = '';
+      if (expAll) {
+        const diff = (new Date(expAll) - new Date()) / (1000*60*60*24);
+        const n = Math.ceil(diff);
+        daysText = n > 0 ? n + ' day(s) left' : 'Expired';
+      }
+      document.getElementById('certDaysTop').textContent = daysText;
+      document.getElementById('certCountdown').textContent = daysText;
+    })
+    .catch(err => console.error('Error loading data.json:', err));
+});
+</script>
+
+<footer style="background:#1a1a1a;color:#888;padding:10px 20px;text-align:left;margin-top:40px;display:flex;justify-content:space-between;align-items:center;">
+  <span>© 2025 Scrumptious Certs</span>
+  <span style="font-size:0.9em;">v2.0.0</span>
+</footer>
+</body></html>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const user = localStorage.getItem('authUser');
+  if (!user) return;
+
+  fetch('data.json?v=' + Date.now())
+    .then(res => res.json())
+    .then(d => {
+      const ann = document.getElementById('ann');
+      const stat = document.getElementById('stat');
+      const dev = document.getElementById('dev');
+      const dl = document.getElementById('dl');
+      const top = document.getElementById('certDaysTop');
+      const bottom = document.getElementById('certCountdown');
+
+      const all = d.announcements?.all || [];
+      const personal = d.announcements?.[user] || [];
+      [...all, ...personal].forEach(msg => {
+        const p = document.createElement('p');
+        p.textContent = msg;
+        ann.appendChild(p);
+      });
+
+      stat.textContent = d.certStatus?.[user] || d.certStatus?.all || '';
+      dev.textContent = d.deviceStatus?.[user] || d.deviceStatus?.all || '';
+      const link = d.certDownloadLink?.[user] || d.certDownloadLink?.all;
+      if (link) dl.href = link;
+
+      const exp = d.certExpires?.[user] || d.certExpires?.all;
+      let days = '';
+      if (exp) {
+        const left = Math.ceil((new Date(exp) - new Date()) / (1000 * 60 * 60 * 24));
+        days = left > 0 ? left + ' day(s) left' : 'Expired';
+      }
+      if (top) top.textContent = days;
+      if (bottom) bottom.textContent = days;
+    })
+    .catch(console.error);
+});
+</script>
+</body>

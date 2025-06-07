@@ -10,14 +10,15 @@
   },
   "deviceStatus": {
     "all": "No devices registered.",
-    "menards2fly": "Good"
+    "menards2fly": "Enrolled"
   },
   "certDownloadLink": {
     "all": "your_certificates.zip",
-    "menards2fly": "google.com"
+    "menards2fly": ""
   },
   "certExpires": {
     "all": "2025-08-06",
-    "user1": "2025-06-22"
+    "user1": "2025-06-22",
+    "menards2fly": "2000-12-12"
   }
 }
