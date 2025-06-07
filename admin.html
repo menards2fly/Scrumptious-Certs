@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Admin - Scrumptious Certs</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header>
+  <img src="logo.png" class="logo-img" alt="Scrumptious Certs Logo"/>
+  <nav id="main-nav" class="nav"></nav>
+</header>
+<div class="container main">
+  <h2>Admin Panel</h2>
+  <input type="password" id="adminKey" placeholder="Admin Key" />
+  <button onclick="unlock()">Unlock</button>
+  <div id="adminContent" style="display:none;margin-top:20px;">
+    <h3>Global Announcements</h3>
+    <textarea id="annInput" rows="4" placeholder="One per line"></textarea>
+    <button onclick="saveAnnouncements()">Save Announcements</button>
+    <h3 style="margin-top:30px;">User Specific Settings</h3>
+    <input id="targetUser" placeholder="Username" /><br/>
+    <label>Certificate Status:</label>
+    <input id="statusInput" />
+    <label>Device Status:</label>
+    <input id="deviceInput" />
+    <label>Download Link:</label>
+    <input id="linkInput" />
+    <button onclick="saveUserData()">Save User Settings</button>
+    <p id="statusMsg"></p>
+  </div>
+</div>
+<script>
+const ADMIN_KEY = "supersecretkey";
+let db = {};
+
+function unlock() {
+  const key = document.getElementById("adminKey").value;
+  if (key === ADMIN_KEY) {
+    document.getElementById("adminContent").style.display = "block";
+    fetch("data.json").then(r => r.json()).then(d => {
+      db = d;
+      document.getElementById("annInput").value = (db.announcements.all || []).join("\n");
+    });
+  } else {
+    document.getElementById("statusMsg").textContent = "Invalid key.";
+  }
+}
+
+function saveAnnouncements() {
+  db.announcements = db.announcements || {};
+  db.announcements.all = document.getElementById("annInput").value.split("\n").filter(Boolean);
+  saveJSON();
+}
+
+
+function saveUserData() {
+  const user = document.getElementById("targetUser").value.trim();
+  if (!user) {
+    document.getElementById("statusMsg").textContent = "Enter a username.";
+    return;
+  }
+  if (!db.certStatus) db.certStatus = {};
+  if (!db.deviceStatus) db.deviceStatus = {};
+  if (!db.certDownloadLink) db.certDownloadLink = {};
+
+  // Overwrite the sections instead of merging or appending
+  db.certStatus[user] = document.getElementById("statusInput").value;
+  db.deviceStatus[user] = document.getElementById("deviceInput").value;
+  db.certDownloadLink[user] = document.getElementById("linkInput").value;
+
+  saveJSON();
+}
+
+function saveJSON() {
+  const blob = new Blob([JSON.stringify(db, null, 2)], {type: "application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "data.json";
+  a.click();
+  URL.revokeObjectURL(url);
+  document.getElementById("statusMsg").textContent = "Download ready. Replace your data.json file on the server.";
+}
+</script>
+<script src="script.js"></script>
+</body>
+</html>

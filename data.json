@@ -1,0 +1,23 @@
+{
+  "announcements": {
+    "all": [
+      "Welcome to Scrumptious Certs!"
+    ]
+  },
+  "certStatus": {
+    "all": "All systems operational.",
+    "menards2fly": "Good"
+  },
+  "deviceStatus": {
+    "all": "No devices registered.",
+    "menards2fly": "Good"
+  },
+  "certDownloadLink": {
+    "all": "your_certificates.zip",
+    "menards2fly": "google.com"
+  },
+  "certExpires": {
+    "all": "2025-08-06",
+    "user1": "2025-06-22"
+  }
+}
