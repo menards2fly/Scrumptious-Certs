@@ -14,7 +14,7 @@
     "all": "No devices registered.",
     "menards2fly": "Enrolled",
     "Abee": "Enrolled",
-    "dolphindot": "Enrolled, 00008120-00024C193C05A01E"
+    "dolphindot": "Enrolled, iPhone 15"
   },
   "certDownloadLink": {
     "all": "your_certificates.zip",
@@ -27,6 +27,6 @@
     "user1": "2025-06-22",
     "menards2fly": "2000-12-12",
     "Abee": "2026-06-06",
-    "dolphindot": "2026-06–06"
+    "dolphindot": "2026-06-06"
   }
 }
