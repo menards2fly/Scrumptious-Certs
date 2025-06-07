@@ -12,13 +12,13 @@
   },
   "deviceStatus": {
     "all": "No devices registered.",
-    "menards2fly": "Enrolled",
-    "Abee": "Enrolled",
+    "menards2fly": "Enrolled, iPhone 13",
+    "Abee": "Enrolled, iPhone 13",
     "dolphindot": "Enrolled, iPhone 15"
   },
   "certDownloadLink": {
     "all": "your_certificates.zip",
-    "menards2fly": "",
+    "menards2fly": "0.zip",
     "Abee": "abee.zip",
     "dolphindot": "1.zip"
   },
